@@ -36,8 +36,8 @@ function esp(plr)
 				Lines.To = Vector2.new(lineVector.X, lineVector.Y)
 				Names.Position = Vector2.new(nameVector.X-2, nameVector.Y)
 
-				Lines.Visible = true
-				Names.Visible = true
+				Lines.Visible = false
+				Names.Visible = false
 
 				if plr.TeamColor then
 					Lines.Color = plr.TeamColor.Color
