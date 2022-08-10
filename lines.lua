@@ -40,7 +40,7 @@ function esp(plr)
 				Lines.To = Vector2.new(lineVector.X, lineVector.Y)
 				Names.Position = Vector2.new(nameVector.X-2, nameVector.Y)
 
-				Lines.Visible = true
+				Lines.Visible = false
 				Names.Visible = true
 
 				if plr.TeamColor then
@@ -56,7 +56,7 @@ function esp(plr)
 						Lines.Visible = false
 						Names.Visible = false
 					else
-						Lines.Visible = false
+						Lines.Visible = true
 						Names.Visible = true
 					end
 				end
