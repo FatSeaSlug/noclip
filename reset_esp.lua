@@ -21,6 +21,7 @@ function esp(plr)
 	Names.OutlineColor = Color3.new(0, 0, 0)
 	Names.Size = 20
 	Names.Visible = false
+	
 
 	RunService.RenderStepped:Connect(function()
 		if plr ~= localplayer and plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") then
@@ -65,10 +66,13 @@ end
 
 for i,v in pairs(Players:GetChildren()) do
 	esp(v)
+	Destroy()
+	
 end
 
 Players.PlayerAdded:Connect(function(v)
 	v.CharacterAdded:Connect(function()
 		esp(v)
+		Destroy()
 	end)
 end)
