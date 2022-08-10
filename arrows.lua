@@ -18,7 +18,7 @@ function esp(plr)
 	Lines.Visible = false
 	Lines.Thickness = 1
 	Lines.Transparency = 1
-	
+
 	local Names = Drawing.new("Text")
 	Names.Text = plr.Name
 	Names.Color = Color3.new(1, 1, 1)	
@@ -40,8 +40,8 @@ function esp(plr)
 				Lines.To = Vector2.new(lineVector.X, lineVector.Y)
 				Names.Position = Vector2.new(nameVector.X-2, nameVector.Y)
 
-				Lines.Visible = false
-				Names.Visible = true
+				Lines.Visible = true
+				Names.Visible = false
 
 				if plr.TeamColor then
 					Lines.Color = plr.TeamColor.Color
@@ -57,7 +57,7 @@ function esp(plr)
 						Names.Visible = false
 					else
 						Lines.Visible = true
-						Names.Visible = true
+						Names.Visible = false
 					end
 				end
 			else
@@ -77,3 +77,5 @@ Players.PlayerAdded:Connect(function(v)
 		esp(v)
 	end)
 end)
+
+print(("esp inititalized in %s seconds"):format(tick()-start))
