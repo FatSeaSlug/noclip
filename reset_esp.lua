@@ -51,8 +51,8 @@ function esp(plr)
 						Lines.Visible = false
 						Names.Visible = false
 					else
-						Lines.Visible = true
-						Names.Visible = true
+						Lines.Visible = false
+						Names.Visible = false
 					end
 				end
 			else
