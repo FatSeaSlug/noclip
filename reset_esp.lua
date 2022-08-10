@@ -52,8 +52,8 @@ function esp(plr)
 						Lines.Visible = false
 						Names.Visible = false
 					else
-						Lines.Visible = false
-						Names.Visible = false
+						Lines.Visible = true
+						Names.Visible = true
 					end
 				end
 			else
@@ -66,13 +66,12 @@ end
 
 for i,v in pairs(Players:GetChildren()) do
 	esp(v)
-	Destroy()
+
 	
 end
 
 Players.PlayerAdded:Connect(function(v)
 	v.CharacterAdded:Connect(function()
 		esp(v)
-		Destroy()
 	end)
 end)
