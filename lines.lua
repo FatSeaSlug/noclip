@@ -18,7 +18,7 @@ function esp(plr)
 	Lines.Visible = false
 	Lines.Thickness = 1
 	Lines.Transparency = 1
-
+	
 	local Names = Drawing.new("Text")
 	Names.Text = plr.Name
 	Names.Color = Color3.new(1, 1, 1)	
