@@ -1,74 +1,83 @@
-local start = tick()
+--// Get the game instances.
 
-_G.TeamLine = true
 
+local CurrentCamera = workspace.CurrentCamera
+local LocalPlayer = game.Players.LocalPlayer
+local Camera = workspace.Camera
+local RunService = game:service('RunService')
 local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
-local localplayer = Players.LocalPlayer
-local cam = workspace.CurrentCamera
 
-function esp(plr)
-	local Lines = Drawing.new("Line")
-	Lines.Color = Color3.new(1, 1, 1)
-	Lines.Visible = false
-	Lines.Thickness = 1
-	Lines.Transparency = 1
-	
-	local Names = Drawing.new("Text")
-	Names.Text = plr.Name
-	Names.Color = Color3.new(1, 1, 1)	
-	Names.Outline = true
-	Names.OutlineColor = Color3.new(0, 0, 0)
-	Names.Size = 20
-	Names.Visible = false
+local CreateInfo = function(Type, Player)
 
-	RunService.RenderStepped:Connect(function()
-		if plr ~= localplayer and plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") then
-			local headPos = plr.Character:FindFirstChild("Head").Position
-			local primaryPos = plr.Character.PrimaryPart.Position
+    --// To run the loop.
 
-			local nameVector, nameSeen = cam:WorldToViewportPoint(headPos)
-			local lineVector, lineSeen = cam:WorldToViewportPoint(primaryPos)
+    local DrawingFunction = function() return true end
 
-			if lineSeen then
-				Lines.From = Vector2.new(cam.ViewportSize.X/2, cam.ViewportSize.Y)
-				Lines.To = Vector2.new(lineVector.X, lineVector.Y)
-				Names.Position = Vector2.new(nameVector.X-2, nameVector.Y)
 
-				Lines.Visible = false
-				Names.Visible = true
+    --// To check what type they created.
 
-				if plr.TeamColor then
-					Lines.Color = plr.TeamColor.Color
-					Names.Color = plr.TeamColor.Color
-				else
-					Lines.Color = Color3.new(1, 1, 1)
-					Names.Color = Color3.new(1, 1, 1)
-				end
+    if Type == "Names" then
 
-				if not _G.TeamLine then
-					if plr.TeamColor == localplayer.TeamColor then
-						Lines.Visible = false
-						Names.Visible = false
-					else
-						Lines.Visible = true
-						Names.Visible = true
-					end
-				end
-			else
-				Lines.Visible = false
-				Names.Visible = false
-			end
-		end
-	end)
+
+        --// Create the drawings.
+
+        local Label = Drawing.new("Text")
+
+        Label.Center = true
+        Label.Outline = true
+        Label.Font = Drawing.Fonts.Monospace
+        Label.Size = 15
+
+
+        --// Redo the function on line:32
+
+        DrawingFunction = function()
+
+
+            --// Make the checks to see if we can draw on the character without problems.
+
+            if Player and Player.Character and Player.Character:WaitForChild("HumanoidRootPart") and Player.Character:FindFirstChild("Head") then
+
+
+                --// This is too see where to put the drawing instances on line:42 or see if the player is OnScreen
+
+                local Pos, Vis = CurrentCamera:WorldToViewportPoint(Player.Character.Head.CFrame.Position)
+
+
+                --// Make the label invisible if the player is not OnScreen
+
+                Label.Text = Player.Name
+                Label.Color = Player.TeamColor.Color
+
+                if Vis then
+                    Label.Visible = true
+                else
+                    Label.Visible = false
+                end
+
+                Label.Position = Vector2.new(Pos.X, Pos.Y)
+
+
+            else
+
+                Label.Visible = false
+
+            end
+
+        end
+
+    end
+
+    RunService:BindToRenderStep("NameTags", 1, DrawingFunction)
+
 end
 
-for i,v in pairs(Players:GetChildren()) do
-	esp(v)
+for i,v in next, Players:GetPlayers() do
+    if v ~= LocalPlayer then
+        CreateInfo("Names", v)
+    end
 end
 
-Players.PlayerAdded:Connect(function(v)
-	v.CharacterAdded:Connect(function()
-		esp(v)
-	end)
+Players.PlayerAdded:connect(function(plr)
+    CreateInfo("Names", plr)
 end)
