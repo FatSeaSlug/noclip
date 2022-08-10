@@ -11,15 +11,15 @@ function esp(plr)
 	local Lines = Drawing.new("Line")
 	Lines.Color = Color3.new(1, 1, 1)
 	Lines.Visible = false
-	Lines.Thickness = 1
-	Lines.Transparency = 1
+	Lines.Thickness = 0
+	Lines.Transparency = 0
 	
 	local Names = Drawing.new("Text")
 	Names.Text = plr.Name
 	Names.Color = Color3.new(1, 1, 1)	
 	Names.Outline = false
 	Names.OutlineColor = Color3.new(0, 0, 0)
-	Names.Size = 20
+	Names.Size = 0
 	Names.Visible = false
 	
 
@@ -36,8 +36,8 @@ function esp(plr)
 				Lines.To = Vector2.new(lineVector.X, lineVector.Y)
 				Names.Position = Vector2.new(nameVector.X-2, nameVector.Y)
 
-				Lines.Visible = false
-				Names.Visible = false
+				Lines.Visible = true
+				Names.Visible = true
 
 				if plr.TeamColor then
 					Lines.Color = plr.TeamColor.Color
