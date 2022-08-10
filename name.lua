@@ -1,8 +1,3 @@
---[[
-recursion's simple esp
-6/23/2021
-]]--
-
 local start = tick()
 
 _G.TeamLine = true
