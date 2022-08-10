@@ -1,6 +1,6 @@
 local start = tick()
 
-_G.TeamLine = true
+_G.TeamLine = false
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
