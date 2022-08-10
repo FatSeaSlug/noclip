@@ -17,7 +17,7 @@ function esp(plr)
 	local Names = Drawing.new("Text")
 	Names.Text = plr.Name
 	Names.Color = Color3.new(1, 1, 1)	
-	Names.Outline = true
+	Names.Outline = false
 	Names.OutlineColor = Color3.new(0, 0, 0)
 	Names.Size = 20
 	Names.Visible = false
